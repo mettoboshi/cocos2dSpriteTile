@@ -34,9 +34,6 @@
 
     CCLOG(@"(x, y): %d, %d", tileNumX, tileNumY);
     
-//    NSMutableArray *rows = [NSMutableArray array];
-//    NSMutableArray *cols = [NSMutableArray array];
-
     cols = [NSMutableArray array];
     
     batch = [CCSpriteBatchNode batchNodeWithFile:@"tile.png"];
@@ -57,36 +54,15 @@
     
     NSLog( @"cols:alloc -> %d", [cols retainCount] );
     NSLog( @"rows:alloc -> %d", [rows retainCount] );
-
-/*
-    for (int i = 0; i < tileSize.y; i++) {
-        for (int j = 0; j < tileSize.x; j++) {
-            CCSprite* temp2 = [[cols objectAtIndex:i] objectAtIndex:j];
-            CCLOG(@"temp2 %f, %f", temp2.position.x, temp2.position.y);
-        }
-    }
-*/
-/*
-    CCSprite* temp2 = [[cols objectAtIndex:15] objectAtIndex:20];
-    CCLOG(@"temp2 %f, %f", temp2.position.x, temp2.position.y);
-*/
-    
-    //    CCLOG(@"temp %f", [[[cols objectAtIndex:0] objectAtIndex:3].position.x ];
-          
-          //, [[[cols objectAtIndex:0]objectAtIndex:3].position.y];
     
     [self addChild:batch];
     [self movePoint];
-
-//    NSLog( @"cols2:alloc -> %d", [cols retainCount] );
-//    NSLog( @"rows2:alloc -> %d", [rows retainCount] );
 
     return self;
 }
 
 
 -(void) movePoint {
-//    [point initWithFile:@"tile.png"];
     point = [MoveItem spriteWithFile:@"tile.png"];
     [point setVelocity:CGPointMake(10, 0)];
     point.position = CGPointMake((tileSize.x / 2), (tileSize.y / 2));
@@ -101,17 +77,7 @@
     changeVelocity = false;
     CGSize winSize =[[CCDirector sharedDirector] winSize];
     point.position = ccpAdd(point.position, point.velocity);
-//    CCLOG(@"position %f, %f",point.position.x,point.position.y);
 
-/*
-    Tile* temp3 = [[cols objectAtIndex:0] objectAtIndex:0];
-    if (temp3.colorChangeFlag) {
-        CCLOG(@"true");
-    }
-    else {
-        CCLOG(@"false");
-    }
-*/
     // pointと当たったオブジェクトの色を変える
     float hit = [point texture].contentSize.width;
     for (int i = 0; i < tileNumY; i++) {
@@ -121,14 +87,9 @@
             float distance = ccpDistance(point.position, temp.position);
                         
             if (hit > distance && temp.nowPointFlag == false) {
-//                [[cols objectAtIndex:i] objectAtIndex:j]
                 
                 temp.nowPointFlag = true;
                 temp.colorChangeFlag = true;
-//                [temp setColor:ccc3(0,0,255)];
-//                [[[cols objectAtIndex:i] replaceObjectAtIndex:j withObject:temp];
-                //velocity.x = 0;
-                //velocity.y = 1;
             }
             
             if (0 < distance && temp.nowPointFlag == true
